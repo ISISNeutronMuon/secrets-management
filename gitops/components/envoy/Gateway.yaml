@@ -12,34 +12,3 @@ spec:
     port: 80
     protocol: HTTP
     hostname: argo.secrets.isis.cclrc.ac.uk
-  # - name: vault-http
-  #   port: 80
-  #   protocol: HTTP
-  #   hostname: vault.vovsike.co.uk
-  #   allowedRoutes:
-  #     namespaces:
-  #       from: All
-  # - name: vault
-  #   port: 443
-  #   protocol: HTTPS
-  #   hostname: vault.vovsike.co.uk
-  #   allowedRoutes:
-  #     namespaces:
-  #       from: All
-  #   tls:
-  #     certificateRefs:
-  #       - group: ""
-  #         kind: Secret
-  #         name: vault-vovsike-co-uk
-  # - name: argocd-https
-  #   allowedRoutes:
-  #     namespaces:
-  #       from: All
-  #   protocol: HTTPS
-  #   port: 443
-  #   hostname: argo.secrets.isis.cclrc.ac.uk
-  #   tls:
-  #     certificateRefs:
-  #       - group: ""
-  #         kind: Secret
-  #         name: vovsike-co-uk
