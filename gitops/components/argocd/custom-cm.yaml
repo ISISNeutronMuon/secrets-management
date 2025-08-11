@@ -21,3 +21,4 @@ data:
           end
         end
         return hs
+  server.insecure: "true"

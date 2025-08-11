@@ -7,6 +7,7 @@ spec:
   parentRefs:
   - name: eg
     namespace: envoy-gateway-system
+    sectionName: argo-cd-https
   hostnames:
     - "argo.secrets.isis.cclrc.ac.uk"
   rules:
