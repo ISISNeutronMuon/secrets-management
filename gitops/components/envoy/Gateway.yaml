@@ -33,3 +33,10 @@ spec:
         - group: ""
           kind: Secret
           name: argo-self-signed-cert
+  - name: vault-http
+    port: 80
+    protocol: HTTP
+    hostname: secrets.isis.cclrc.ac.uk
+    allowedRoutes:
+      namespaces:
+        from: All

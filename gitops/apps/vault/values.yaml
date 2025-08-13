@@ -1,43 +1,29 @@
 injector:
   enabled: false
 server:
+  dataStorage: 
+    enabled: false
   image:
     tag: 1.20.0
-  ha: false
-  standalone: false
-  config: ""
-  extraVolumes:
-    - name: vault-db-creds
-      secret:
-        secretName: vault-db-creds
-    - name: vault-config-dynamic
-      emptyDir: {}    
-  extraVolumeMounts:
-    - name: vault-db-creds
-      mountPath: /vault/db-creds
-      readOnly: true
-    - name: vault-config-dynamic
-      mountPath: /vault/config
-      readOnly: false
-  extraInitContainers:
-  - name: generate-vault-config
-    image: busybox:1.36
-    command:
-      - sh
-      - -c
-      - |
-        USER=$(cat /vault/db-creds/username)
-        PASS=$(cat /vault/db-creds/password)
-        cat <<EOF > /vault/config/vault.hcl
-        storage "postgresql" {
-          connection_url = "postgresql://${USER}:${PASS}@dbspgha01.fds.rl.ac.uk/postgres"
-        }
-        EOF
-  volumeMounts:
-    - name: vault-db-creds
-      mountPath: /vault/db-creds
-      readOnly: true
-    - name: vault-config-dynamic
-      mountPath: /vault/config
+  extraSecretEnvironmentVars:
+    - envName: VAULT_PG_CONNECTION_URL
+      secretName: vault-db-creds
+      secretKey: db_url
+  ha:
+    enabled: true
+    config: | 
+      storage "postgresql" {
+          ha_enabled = "true"
+      }
+      listener "tcp" {
+        tls_disable = 1
+        address = "[::]:8200"
+        cluster_address = "[::]:8201"
+      }
+      ui = true
+      service_registration "kubernetes" {}
+    
+  standalone: 
+    enabled: false
 ui:
   enabled: true

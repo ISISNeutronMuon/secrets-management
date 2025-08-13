@@ -6,7 +6,7 @@ metadata:
 spec:
   parentRefs:
   - name: eg
-    sectionName: vault
+    sectionName: vault-http
     namespace: envoy-gateway-system
   hostnames:
     - "secrets.isis.cclrc.ac.uk"
