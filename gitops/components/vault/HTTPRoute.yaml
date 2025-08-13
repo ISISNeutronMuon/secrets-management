@@ -1,0 +1,20 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: vault-route
+  namespace: vault
+spec:
+  parentRefs:
+  - name: eg
+    sectionName: vault
+    namespace: envoy-gateway-system
+  hostnames:
+    - "secrets.isis.cclrc.ac.uk"
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /
+    backendRefs:
+    - name: vault-ui
+      port: 8200
