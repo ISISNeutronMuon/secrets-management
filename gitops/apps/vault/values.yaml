@@ -4,7 +4,7 @@ server:
   dataStorage: 
     enabled: false
   image:
-    tag: 1.20.0
+    tag: 1.20.1
   extraSecretEnvironmentVars:
     - envName: VAULT_PG_CONNECTION_URL
       secretName: vault-db-creds
