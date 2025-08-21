@@ -14,6 +14,10 @@ spec:
     - type: IPAddress
       value: 130.246.83.9
   listeners:
+  - name: http-argo
+    port: 80
+    protocol: HTTP
+    hostname: argo.secrets.isis.rl.ac.uk
   - name: https-argo
     allowedRoutes:
       namespaces:
