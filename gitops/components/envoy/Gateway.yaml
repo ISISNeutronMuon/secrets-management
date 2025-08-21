@@ -30,3 +30,19 @@ spec:
         - group: ""
           kind: Secret
           name: secrets-isis-rl-ac-uk
+  - name: http-argo
+    port: 80
+    protocol: HTTP
+    hostname: argo.secrets.isis.rl.ac.uk
+  - name: https-argo
+    allowedRoutes:
+      namespaces:
+        from: All
+    protocol: HTTPS
+    port: 443
+    hostname: argo.secrets.isis.rl.ac.uk
+    tls:
+      certificateRefs:
+        - group: ""
+          kind: Secret
+          name: argo-secrets-isis-rl-ac-uk
