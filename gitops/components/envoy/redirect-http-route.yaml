@@ -8,12 +8,8 @@ spec:
   - name: eg
     namespace: envoy-gateway-system
     sectionName: http-vault
-  - name: eg
-    namespace: envoy-gateway-system
-    sectionName: http-argo
   hostnames:
     - "secrets.isis.rl.ac.uk"
-    - "argo.secrets.isis.rl.ac.uk"
   rules:
     - filters:
         - type: RequestRedirect
