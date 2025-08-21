@@ -29,4 +29,4 @@ spec:
       certificateRefs:
         - group: ""
           kind: Secret
-          name: secrets-isis-rl-ac-uk-staging
+          name: secrets-isis-rl-ac-uk
