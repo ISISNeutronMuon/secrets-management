@@ -6,10 +6,10 @@ metadata:
 spec:
   parentRefs:
   - name: eg
-    sectionName: vault-http
+    sectionName: https-vault
     namespace: envoy-gateway-system
   hostnames:
-    - "secrets.isis.cclrc.ac.uk"
+    - "secrets.isis.rl.ac.uk"
   rules:
   - matches:
     - path:
