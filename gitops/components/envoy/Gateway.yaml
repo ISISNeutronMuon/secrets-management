@@ -14,29 +14,19 @@ spec:
     - type: IPAddress
       value: 130.246.83.9
   listeners:
-  - name: argo-cd-http
+  - name: http-vault
     port: 80
     protocol: HTTP
-    hostname: argo.secrets.isis.cclrc.ac.uk
+    hostname: secrets.isis.rl.ac.uk
+  - name: https-vault
     allowedRoutes:
       namespaces:
         from: All
-  - name: argo-cd-https
-    port: 443
     protocol: HTTPS
-    hostname: argo.secrets.isis.cclrc.ac.uk
-    allowedRoutes:
-      namespaces:
-        from: All
+    port: 443
+    hostname: secrets.isis.rl.ac.uk
     tls:
       certificateRefs:
         - group: ""
           kind: Secret
-          name: argo-self-signed-cert
-  - name: vault-http
-    port: 80
-    protocol: HTTP
-    hostname: secrets.isis.cclrc.ac.uk
-    allowedRoutes:
-      namespaces:
-        from: All
+          name: secrets-isis-rl-ac-uk-staging
