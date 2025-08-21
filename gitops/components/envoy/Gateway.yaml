@@ -14,22 +14,6 @@ spec:
     - type: IPAddress
       value: 130.246.83.9
   listeners:
-  - name: http-vault
-    port: 80
-    protocol: HTTP
-    hostname: secrets.isis.rl.ac.uk
-  - name: https-vault
-    allowedRoutes:
-      namespaces:
-        from: All
-    protocol: HTTPS
-    port: 443
-    hostname: secrets.isis.rl.ac.uk
-    tls:
-      certificateRefs:
-        - group: ""
-          kind: Secret
-          name: secrets-isis-rl-ac-uk
   - name: http-argo
     port: 80
     protocol: HTTP
@@ -46,3 +30,19 @@ spec:
         - group: ""
           kind: Secret
           name: argo-secrets-isis-rl-ac-uk
+  - name: http-vault
+    port: 80
+    protocol: HTTP
+    hostname: secrets.isis.rl.ac.uk
+  - name: https-vault
+    allowedRoutes:
+      namespaces:
+        from: All
+    protocol: HTTPS
+    port: 443
+    hostname: secrets.isis.rl.ac.uk
+    tls:
+      certificateRefs:
+        - group: ""
+          kind: Secret
+          name: secrets-isis-rl-ac-uk
