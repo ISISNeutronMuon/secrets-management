@@ -7,7 +7,7 @@ spec:
   parentRefs:
   - name: eg
     namespace: envoy-gateway-system
-    sectionName: vault-http
+    sectionName: http-vault
   hostnames:
     - "secrets.isis.rl.ac.uk"
   rules:
