@@ -19,6 +19,7 @@ spec:
       - http01:
           gatewayHTTPRoute:
             parentRefs:
-              - name: eg
+              - group: gateway.networking.k8s.io
+                name: eg
                 namespace: envoy-gateway-system
                 kind: Gateway
