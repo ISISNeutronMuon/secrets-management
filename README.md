@@ -56,4 +56,4 @@ vault operator unseal
 exit
 ```
 
-At this point you should have configured vault and it should be reachable on https://secrets.isis.cclrc.ac.uk
+At this point you should have configured vault and it should be reachable on https://secrets.isis.rl.ac.uk for vault and for argoCD use https://argo.secrets.isis.rl.ac.uk
