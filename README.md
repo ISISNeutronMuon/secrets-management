@@ -1,8 +1,16 @@
 # secrets-management
 
+# Create cluster
+
+These instructions will use the files in the capi directory in this repo. So navigate to this directory before following CLI commands at STFC-Cloud documentation for a management cluster. The cluster we will be making is self-managed.
+
+Use the capi directory in this repository as your folder that contains the clouds.yaml, and values.yaml files for the helm charts that handle upgrades. The clouds.yaml file will need to be provided by the developer and is in the .gitignore purposefully.
+
+Follow these instructions [here](https://stfc.atlassian.net/wiki/spaces/CLOUDKB/pages/211878034/Cluster+API+Setup) for setting up the cluster on the cloud, currently we make the cluster "manually" not using the bootstrap as it seems to be a little problematic under some circumstances, the only caveat is that there is not intended to be any management cluster and the cluster should self manage (the management cluster just does everything i.e. there is no prod/staging/dev).
+
 # How to deploy vault to the cluster
-## 1. DB secret craetion 🔒
-After the cluster has been setup you will need to crate a secret manually that connects vault to the database.
+## 1. DB secret creation 🔒
+After the cluster has been setup you will need to create a secret manually that connects vault to the database.
 
 Create a namespace "vault" navigate to the location of the secret and run `kubectl apply -f vault-db-creds-secret.yaml`
 
