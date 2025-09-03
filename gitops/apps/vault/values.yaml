@@ -5,6 +5,8 @@ server:
     enabled: false
   image:
     tag: 1.20.1
+  extraEnvironmentVars:
+    VAULT_LOG_LEVEL: trace
   extraSecretEnvironmentVars:
     - envName: VAULT_PG_CONNECTION_URL
       secretName: vault-db-creds
