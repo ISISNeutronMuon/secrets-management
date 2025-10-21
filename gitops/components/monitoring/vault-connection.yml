@@ -5,4 +5,4 @@ metadata:
   namespace: monitoring
   name: default
 spec:
-  address: "http://vault.vault.svc.cluster.local:8200"
+  address: "https://secrets.isis.rl.ac.uk"
