@@ -9,7 +9,7 @@ spec:
   vaultAuthRef: static-auth
 
   # Things to change:
-  mount: observability
+  mount: isis-secrets
   path: mimir-basic-auth
   destination:
     name: mimir-basic-auth

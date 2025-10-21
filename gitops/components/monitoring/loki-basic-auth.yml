@@ -9,7 +9,7 @@ spec:
   vaultAuthRef: static-auth
 
   # Things to change:
-  mount: observability
+  mount: isis-secrets
   path: loki-basic-auth
   destination:
     name: loki-basic-auth
