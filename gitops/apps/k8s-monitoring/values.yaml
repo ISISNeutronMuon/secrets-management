@@ -1,0 +1,80 @@
+cluster:
+  name: isis-secrets
+
+destinations:
+  - name: metrics-service
+    type: prometheus
+    url: https://mimir.observability.isis.rl.ac.uk/isis-secrets/api/v1/push
+    auth:
+      type: basic
+      usernameKey: username
+      passwordKey: password
+    secret:
+      create: false
+      name: mimir-basic-auth
+      namespace: monitoring
+
+  - name: logs-service
+    type: loki
+    url: https://loki.observability.isis.rl.ac.uk/isis-secrets/loki/api/v1/push
+    auth:
+      type: basic
+      usernameKey: username
+      passwordKey: password
+    secret:
+      create: false
+      name: loki-basic-auth
+      namespace: monitoring
+
+annotationAutodiscovery:
+  enabled: true
+  namespaces: [argocd, envoy-gateway-system, vault]
+
+applicationObservability:
+  enabled: false
+
+clusterEvents:
+  enabled: true
+  namespaces: [loki, mimir, tempo, grafana, vault-op, argocd, envoy-gateway-system, s3-exporter, monitoring]
+
+clusterMetrics:
+  enabled: true
+  cadvisor:
+    metricsTuning:
+      includeNamespaces: [loki, mimir, tempo, grafana, vault-op, argocd, envoy-gateway-system, s3-exporter, monitoring]
+  kube-state-metrics:
+    namespaces: [loki, mimir, tempo, grafana, vault-op, argocd, envoy-gateway-system, s3-exporter, monitoring]
+
+podLogs:
+  enabled: true
+  # Explicitly not logging the monitoring stack here
+  namespaces: [loki, mimir, tempo, grafana, vault-op, argocd, envoy-gateway-system, s3-exporter]
+
+profiling:
+  enabled: false
+
+prometheusOperatorObjects:
+  enabled: true
+  crds:
+    deploy: true
+  probes:
+    namespaces: [loki, mimir, tempo, grafana, vault-op, argocd, envoy-gateway-system, s3-exporter, monitoring]
+  podMonitors:
+    namespaces: [loki, mimir, tempo, grafana, vault-op, argocd, envoy-gateway-system, s3-exporter, monitoring]
+  serviceMonitors:
+    namespaces: [loki, mimir, tempo, grafana, vault-op, argocd, envoy-gateway-system, s3-exporter, monitoring]
+
+alloy-metrics:
+  enabled: true
+
+alloy-singleton:
+  enabled: true
+
+alloy-logs:
+  enabled: true
+
+alloy-receiver:
+  enabled: false
+
+alloy-profiles:
+  enabled: false

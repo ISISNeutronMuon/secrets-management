@@ -1,0 +1,53 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: monitoring
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "200"
+spec:
+  project: default
+  sources:
+    - repoURL: https://grafana.github.io/helm-charts
+      targetRevision: 3.4.2
+      chart: k8s-monitoring
+      helm:
+        valueFiles:
+        - $values/gitops/apps/k8s-monitoring/values.yaml
+    - repoURL: https://github.com/ISISNeutronMuon/secrets-management/
+      targetRevision: HEAD
+      ref: values
+  destination:
+    namespace: monitoring
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - ServerSideApply=true
+      - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: monitoring-config
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "200"
+spec:
+  project: default
+  source:
+    path: gitops/components/monitoring
+    repoURL: https://github.com/ISISNeutronMuon/secrets-management/
+    targetRevision: HEAD
+  destination:
+    namespace: monitoring
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - ServerSideApply=true
+      - CreateNamespace=true
