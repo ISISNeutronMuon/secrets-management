@@ -28,27 +28,27 @@ destinations:
 
 annotationAutodiscovery:
   enabled: true
-  namespaces: [argocd, envoy-gateway-system, vault]
+  namespaces: [argocd, envoy-gateway-system, monitoring, vault, vault-op]
 
 applicationObservability:
   enabled: false
 
 clusterEvents:
   enabled: true
-  namespaces: [loki, mimir, tempo, grafana, vault-op, argocd, envoy-gateway-system, s3-exporter, monitoring]
+  namespaces: [argocd, envoy-gateway-system, monitoring, vault, vault-op]
 
 clusterMetrics:
   enabled: true
   cadvisor:
     metricsTuning:
-      includeNamespaces: [loki, mimir, tempo, grafana, vault-op, argocd, envoy-gateway-system, s3-exporter, monitoring]
+      includeNamespaces: [argocd, envoy-gateway-system, monitoring, vault, vault-op]
   kube-state-metrics:
-    namespaces: [loki, mimir, tempo, grafana, vault-op, argocd, envoy-gateway-system, s3-exporter, monitoring]
+    namespaces: [argocd, envoy-gateway-system, monitoring, vault, vault-op]
 
 podLogs:
   enabled: true
   # Explicitly not logging the monitoring stack here
-  namespaces: [loki, mimir, tempo, grafana, vault-op, argocd, envoy-gateway-system, s3-exporter]
+  namespaces: [argocd, envoy-gateway-system, monitoring, vault, vault-op]
 
 profiling:
   enabled: false
@@ -58,11 +58,11 @@ prometheusOperatorObjects:
   crds:
     deploy: true
   probes:
-    namespaces: [loki, mimir, tempo, grafana, vault-op, argocd, envoy-gateway-system, s3-exporter, monitoring]
+    namespaces: [argocd, envoy-gateway-system, monitoring, vault, vault-op]
   podMonitors:
-    namespaces: [loki, mimir, tempo, grafana, vault-op, argocd, envoy-gateway-system, s3-exporter, monitoring]
+    namespaces: [argocd, envoy-gateway-system, monitoring, vault, vault-op]
   serviceMonitors:
-    namespaces: [loki, mimir, tempo, grafana, vault-op, argocd, envoy-gateway-system, s3-exporter, monitoring]
+    namespaces: [argocd, envoy-gateway-system, monitoring, vault, vault-op]
 
 alloy-metrics:
   enabled: true
