@@ -29,3 +29,7 @@ server:
     enabled: false
 ui:
   enabled: true
+serverTelemetry:
+  serviceMonitor:
+    enabled: true
+
