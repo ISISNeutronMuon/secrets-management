@@ -1,3 +1,6 @@
+global:
+  serverTelemetry:
+    prometheusOperator: true
 injector:
   enabled: false
 server:
@@ -21,9 +24,13 @@ server:
         tls_disable = 1
         address = "[::]:8200"
         cluster_address = "[::]:8201"
+        telemetry {
+          unauthenticated_metrics_access = "true"
+        }
       }
       ui = true
       service_registration "kubernetes" {}
+      telemetry {}
     
   standalone: 
     enabled: false
