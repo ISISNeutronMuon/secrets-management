@@ -12,7 +12,7 @@ Follow these instructions [here](https://stfc.atlassian.net/wiki/spaces/CLOUDKB/
 ## 1. DB secret creation 🔒
 After the cluster has been setup you will need to create a secret manually that connects vault to the database.
 
-Create a namespace "vault" and run `kubectl create secret generic vault-db-creds --from-literal=db_url=postgresql:<username>:<password>@dbspgha01.fds.rl.ac.uk:5432/<db_name> -n vault` replacing <username>, <password> and <db_name> with the actual values.
+Create a namespace "vault" and run `kubectl create secret generic vault-db-creds --from-literal=db_url=postgresql//:<username>:<password>@dbspgha-prod01.fds.rl.ac.uk:6432/<db_name> -n vault` replacing <username>, <password> and <db_name> with the actual values.
 
 This should create a secret that is required by vault
 
