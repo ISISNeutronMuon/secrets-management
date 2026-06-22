@@ -22,46 +22,37 @@ The next step is to deploy argocd and the app-of-apps. To do that simple run `ku
 Give it a few minutes and the entire cluster should be up and running
 
 ## 3. Unlocking vault 🔓
-The last bit is to unlock vault, after argocd has been ran, check the pods on the cluster, there should be pods named like `vault-0`, exec into a vault and run the following command: `vault operator init` this should output 5 unseal keys as well as a root token.
+Whenever the pods start/restart the vault starts in a sealed state and needs to be unlocked with unseal keys.
+Check the current pod status with `kubectl get pods -n vault` - each pod will show `0/1` in the `READY` column if they are sealed.
+
+### Generating root and unseal keys (only after first deployment)
+
+If this is the first run of the deployment, the root and unseal keys need to be generated:
+
+```sh
+> kubectl exec vault-0 -n vault --stdin --tty -- /bin/sh
+(inside pod) > vault operator init
+```
+This should output 5 unseal keys as well as a root token.
 
 > [!IMPORTANT]
-> Make sure to save those keys and the root token somewhere safe like Keeper
+> Save those keys and the root token somewhere safe like Keeper
 
-After that is done run `vault operator unseal` when promted enter the unseal key, repeat this process 3 times (each time using a new key) until the vault is unsealed.
+### Unsealing the vault pods
 
-*the commands will look like so*
+Now we have the root and unseal keys we can unseal each pod. For each pod named `vault-` do the following
 
-```
-vault operator init
-
-<output of the keys and a root toke>
-
-vault operator unseal
-<inputy key 1>
-
-vault operator unseal
-<input key 2>
-
-vault operator unseal
-<input key 3>
-
-exit
+```sh
+> kubectl exec vault-0 -n vault --stdin --tty -- /bin/sh
+> vault operator unseal
+<paste key 1>
+> vault operator unseal
+<paste key 2>
+> vault operator unseal
+<paste key 3>
+> exit
 ```
 
-After the first pod is unsealed it should come online. Repeat the process for all remaining pods but **DON'T RUN `vault operator init`**
-
-*So the commands for other pods will look like so*
-```
-vault operator unseal
-<inputy key 1>
-
-vault operator unseal
-<input key 2>
-
-vault operator unseal
-<input key 3>
-
-exit
-```
+Check `kubectl get pods -n vault` and the `vault-{i}` pod should show `1/1` in the `READY` column. Ensure this process is completed for each pod separately.
 
 At this point you should have configured vault and it should be reachable on https://secrets.isis.rl.ac.uk for vault and for argoCD use https://argo.secrets.isis.rl.ac.uk
